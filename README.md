@@ -9,7 +9,7 @@ LDAP (Lightweight Directory Access Protocol) is an open and cross-platform proto
 
 ## Packages 📦
 
-To set up a web server with LDAP authentication and MariaDB database, you will need:
+To set up a Debian12 Web Server with LDAP authentication, you will need :
 
 - **`apache2`** - Package used to set up the web server.
 - **`php`** - Package to run PHP scripts on the web server.
