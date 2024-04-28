@@ -1,6 +1,7 @@
 <h1 align="center">WebADViewer 🗃</h1>
 
-WebADViewer is a web application designed to allow users to connect to an Active Directory via LDAP and view information about users and groups in a secure and efficient manner.
+> 🗃 WebADViewer lets employees verify credentials and view colleagues' services via LDAP.
+
 
 ## What is LDAP Authentication? 🔐
 
@@ -73,10 +74,6 @@ Ensure that your LDAP server settings and IP addresses are correctly configured 
 
 <img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/WebADViewer.png" width="900" title="WebADViewer">
 
- ## <u>**📜 License**</u>
- 
- This project is licensed under the MIT License - see the LICENSE.md file for details.
-
  ## 👤 Author
 
 **Showzur**
@@ -88,5 +85,11 @@ Ensure that your LDAP server settings and IP addresses are correctly configured 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+***
+
+## 📝 License
+
+Copyright © 2024 [Showzur](https://github.com/shwzr).<br />
 
 ***
