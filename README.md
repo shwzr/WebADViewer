@@ -24,22 +24,22 @@ This example details setting up a web server on Debian 12 using Active Directory
 ### <u>💡 Installation of Packages on Web Server</u>
 
 * Install the packages :
-```bash 
+`
 apt update && apt install git apache2 php libapache2-mod-php libapache2-mod-ldap-userdir ldap-utils -y
-```
+`
 
 
  <u>**⚙ Configuration**</u><u> </u>​<u>**of LDAP Authentication on Web Server**</u>
 
 * Enable LDAP modules LDAP : 
-```bash 
+`
 a2enmod ldap && a2enmod authnz_ldap && systemctl restart apache2
-```
+`
 
 * Restart to apply changes : 
-```bash 
+`
 systemctl restart apache2
-```
+`
 
  <u>**⚙ Configuration**</u><u> </u>​<u>**of LDAP Rules on Windows Server**</u>
 
