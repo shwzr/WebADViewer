@@ -25,7 +25,7 @@ This example details setting up a web server on Debian 12 using Active Directory
 
 * Install the packages :
 ```bash 
-apt update && apt install apache2 php libapache2-mod-php libapache2-mod-ldap-userdir ldap-utils -y
+apt update && apt install git apache2 php libapache2-mod-php libapache2-mod-ldap-userdir ldap-utils -y
 ```
 
 
