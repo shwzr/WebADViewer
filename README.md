@@ -57,7 +57,7 @@ systemctl restart apache2
 
 * Clone the repository : `git clone https://github.com/shwzr/WebADViewer.git `
 
-* Move the repository content to the web directory : `mv WebADViewer/* /var/www/html/`
+* Move the repository content to the web directory : `rm /var/www/html/index.html && mv WebADViewer/* /var/www/html/`
 
 * Modify the config.php file to match your LDAP configuration : `nano /var/www/html/config.php`
 ```bash
