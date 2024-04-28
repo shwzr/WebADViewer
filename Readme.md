@@ -18,7 +18,7 @@ To set up a web server with LDAP authentication and MariaDB database, you will n
 
 This example details setting up a web server on Debian 12 using Active Directory authentication via LDAP. The network includes a Windows Server 2022 with an IP address of **192.168.1.100** serving as the Active Directory server. The web server, running Apache2, is configured on a Debian machine at the IP address **192.168.1.10**.
 
-IMAGE
+<img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/context.png" width="900" title="context">
 
 ### <u>💡 Installation of Packages on Web Server</u>
 
@@ -42,7 +42,7 @@ systemctl restart apache2
 
  <u>**⚙ Configuration**</u><u> </u>​<u>**of LDAP Rules on Windows Server**</u>
 
-* Créez deux nouvelles règles LDAP (port 389 et 636) sur powershell :
+* Create two new LDAP rules (ports 389 and 636) on PowerShell :
 
   `New-NetFirewallRule -DisplayName "LDAP Inbound" -Direction Inbound -Protocol TCP -LocalPort 389 -Action Allow`
 
@@ -50,7 +50,7 @@ systemctl restart apache2
 
 * Use **LDP.exe** for a test connection by running **LDP.exe** from the **Start Menu**. In the **Connection menu**, click **Connect**. Enter the server address (Example: **192.168.1.100**), specify port **389** for **LDAP**, and click **OK** to test the secure connection.
 
-IMAGE
+<img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/ldp.png" width="650" title="ldp">
 
  <u>**🌐 Website Deployment**</u>
 
@@ -71,4 +71,8 @@ $dc_string = 'dc=shyno,dc=tech'; // Chaîne DC pour la requête LDAP
 
 Ensure that your LDAP server settings and IP addresses are correctly configured in the actual environment.
 
-IMAGE
+<img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/WebADViewer.png" width="900" title="WebADViewer">
+
+ ## <u>**📜 License**</u>
+ 
+ This project is licensed under the MIT License - see the LICENSE.md file for details.
