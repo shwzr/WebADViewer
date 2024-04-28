@@ -1,4 +1,4 @@
-# WebADViewer 🗃
+# WebADViewer 🌐
 
 WebADViewer is a web application designed to allow users to connect to an Active Directory via LDAP and view information about users and groups in a secure and efficient manner.
 
@@ -16,58 +16,40 @@ To set up a web server with LDAP authentication and MariaDB database, you will n
 
 ## Preparation 🛠
 
-This example details setting up a web server on Debian 12 using Active Directory authentication via LDAP. The network includes a Windows Server 2022 with an IP address of **192.168.1.100** serving as the Active Directory server. The web server, running Apache2, is configured on a Debian machine at the IP address **192.168.1.10**.
+This example details setting up a web server on Debian 12 using Active Directory authentication via LDAP. The network includes a Windows Server 2022 with an IP address of `192.168.1.100` serving as the Active Directory server. The web server, running Apache2, is configured on a Debian machine at the IP address `192.168.1.10`.
 
 IMAGE
 
-### <u>💡 Installation of Packages on Web Server</u>
+### <u>💡 Installation des Paquets sur serveur web</u>
 
-* Install the packages : 
-`
+* Installez les paquets : 
+```bash 
 apt update && apt install apache2 php libapache2-mod-php libapache2-mod-ldap-userdir ldap-utils -y
-`
+```
 
 
- <u>**⚙ Configuration**</u><u> </u>​<u>**of LDAP Authentication on Web Server**</u>
+ <u>**⚙ Configuration**</u><u> </u>​<u>**de l'authentification LDAP sur serveur web**</u>
 
-* Enable LDAP modules : 
-`
+* Activez les modules LDAP : 
+```bash 
 a2enmod ldap && a2enmod authnz_ldap && systemctl restart apache2
-`
+```
 
-* Restart to apply changes : 
-`
+* Redémarrez appliquer les changements : 
+```bash 
 systemctl restart apache2
-`
+```
 
- <u>**⚙ Configuration**</u><u> </u>​<u>**of LDAP Rules on Windows Server**</u>
+ <u>**⚙ Configuration**</u><u> </u>​<u>**des règles LDAP sur serveur windows**</u>
 
-* Create two new LDAP rules (ports 389 and 636) on PowerShell :
+* Créez deux nouvelles règles LDAP (port 389 et 636) sur powershell :
 
   `New-NetFirewallRule -DisplayName "LDAP Inbound" -Direction Inbound -Protocol TCP -LocalPort 389 -Action Allow`
 
   `New-NetFirewallRule -DisplayName "LDAPs Inbound" -Direction Inbound -Protocol TCP -LocalPort 636 -Action Allow`
 
-* Use **LDP.exe** for a test connection by running **LDP.exe** from the **Start Menu**. In the **Connection menu**, click **Connect**. Enter the server address (Example: **192.168.1.100**), specify port **389** for **LDAP**, and click **OK** to test the secure connection.
+* Use **LDP.exe** for a test connection by running **LDP.exe** from the **Start Menu**. In the **Connection menu**, click **Connect**. Enter the server address (Example: `192.168.1.100`), specify port `389` for **LDAP**, and click **OK** to test the secure connection.
 
 IMAGE
 
  <u>**🌐 Website Deployment**</u>
-
-* Clone the repository : `git clone https://github.com/shwzr/WebADViewer.git `
-* Move the repository content to the web directory : `mv WebADViewer/* /var/www/html/`
-* Modify the <kbd>config.php</kbd> file to match your LDAP configuration : `nano /var/www/html/config.php`
-
-  ```config.php
-  <?php
-  // Configuration de LDAP
-  $ldap_host = '192.168.1.100'; // Adresse IP du serveur LDAP
-  $ldap_port = '389';          // Port du serveur LDAP
-  $ldap_domain = 'shyno.tech'; // Domaine LDAP
-  $dc_string = 'dc=shyno,dc=tech'; // Chaîne DC pour la requête LDAP
-  ?>
-  ```
-
-  Ensure that your LDAP server settings and IP addresses are correctly configured in the actual environment.
-
-  IMAGE
