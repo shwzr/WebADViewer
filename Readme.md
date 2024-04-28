@@ -1,4 +1,4 @@
-# WebADViewer 🗃
+<h1 align="center">WebADViewer 🗃</h1>
 
 WebADViewer is a web application designed to allow users to connect to an Active Directory via LDAP and view information about users and groups in a secure and efficient manner.
 
@@ -76,3 +76,17 @@ Ensure that your LDAP server settings and IP addresses are correctly configured 
  ## <u>**📜 License**</u>
  
  This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+ ## 👤 Author
+
+**Showzur**
+
+* SRV Discord: [Shynonime](https://shynonime.glitch.me) 
+* Twitter: [@Showzur](https://twitter.com/Showzur)
+* Github: [@shwzr](https://github.com/shwzr)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
