@@ -1,4 +1,4 @@
-# WebADViewer 🌐
+# WebADViewer 🗃
 
 WebADViewer is a web application designed to allow users to connect to an Active Directory via LDAP and view information about users and groups in a secure and efficient manner.
 
