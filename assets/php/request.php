@@ -6,10 +6,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST["password"]);
     require 'config.php';
 
-    // Forme la commande LDAP à exécuter
-    $ldap_command = "ldapsearch -x -H ldap://{$ldap_host}:{$ldap_port} -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
+    // Tente d'abord avec LDAPS
+    $ldap_command = "ldapsearch -x -H ldaps://{$ldap_host}:636 -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
     exec($ldap_command, $output, $return_value);
 
+    // Si LDAPS échoue, réessayer immédiatement avec LDAP
+    if ($return_value !== 0) {
+        $ldap_command = "ldapsearch -x -H ldap://{$ldap_host}:{$ldap_port} -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
+        exec($ldap_command, $output, $return_value);
+    }
+
+    // Traitement après la tentative de connexion
     if ($return_value === 0) {
         session_start();
         session_regenerate_id();  // Sécurise la session en régénérant l'ID
