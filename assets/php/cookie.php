@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si l'utilisateur accepte les cookies
     if (isset($_POST['accept_cookies'])) {
         // Crée un cookie 'accept_cookies' qui expire après 24 heures
-        setcookie('accept_cookies', 'true', time() + 24 * 60 * 60, '/');
+        setcookie('accept_cookies', 'true', time() + 24 * 60 * 60, '/', '', true, true);
         // Enregistre dans la session que les cookies n'ont pas été refusés
         $_SESSION['cookie_declined'] = false;
     }
