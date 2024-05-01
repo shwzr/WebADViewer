@@ -19,7 +19,7 @@ To set up a Debian12 Web Server with LDAP authentication, you will need :
 
 This example details setting up a web server on Debian 12 using Active Directory authentication via LDAP. The network includes a Windows Server 2022 with an IP address of **192.168.1.100** serving as the Active Directory server. The web server, running Apache2, is configured on a Debian machine at the IP address **192.168.1.10**.
 
-<img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/context.png" width="900" title="context">
+<img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/contexte.png" width="900" title="context">
 
 ### <u>💡 Installation of Packages on Web Server</u>
 
