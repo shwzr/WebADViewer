@@ -72,6 +72,47 @@ $dc_string = 'dc=shyno,dc=tech';   // DC string for the LDAP query
 
 Ensure that your LDAP server settings and IP addresses are correctly configured in the actual environment.
 
+
+ <u>**📜 Configure the SSL Certificate**</u>
+
+* Install OpenSSL : `apt install openssl`
+* Create the SSL Certificate : 
+  `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt`
+
+  During generation, OpenSSL will ask you to fill out some information, such as the country, state, organization, etc. For local use, these can be fictitious.
+  
+  1 - **Country Name (2 letter code)** : Specify ​**Ile-de-France​** as the state or province.<br>
+  2 - **State or Province Name (full name)** : Indiquez **​`Ile-de-France`​** comme état ou province.<br>
+  3 - **Locality Name (eg, city)** : Write **Paris** for the city.<br>
+  4 - **Organization Name (eg, company)** : Leave this field **empty**.<br>
+  5 - **Organizational Unit Name (eg, section)** : Leave this field **empty**.<br>
+  6 - **Common Name (e.g. server FQDN or YOUR name)** : The full domain name, here it would be **www.shyno.tech**.<br>
+  7 - **Email Address**: Leave this field **empty**.<br>
+ 
+     
+* Create an SSL configuration snippet for Apache : `nano /etc/apache2/conf-available/ssl-params.conf`
+  ```ssl-params.conf
+  SSLCipherSuite HIGH:!aNULL:!MD5
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLHonorCipherOrder On
+  Header always set X-Frame-Options DENY
+  Header always set X-Content-Type-Options nosniff
+  SSLCompression off
+  SSLUseStapling on
+  SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+  ```
+  
+* Enable the new configuration file : `a2enconf ssl-params && a2enmod headers`
+* Edit the default site configuration file to include SSL : `nano /etc/apache2/sites-available/default-ssl.conf`
+  ```default-ssl.conf
+  SSLEngine on
+  SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+  SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+  ```
+  
+* Enable the SSL Module and SSL Site : `a2enmod ssl && a2ensite default-ssl && systemctl restart apache2`
+
+
 <img src="https://raw.githubusercontent.com/shwzr/WebADViewer/main/assets/img/WebADViewer.png" width="900" title="WebADViewer">
 
  ## 👤 Author
