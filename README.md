@@ -81,13 +81,13 @@ Ensure that your LDAP server settings and IP addresses are correctly configured 
 
   During generation, OpenSSL will ask you to fill out some information, such as the country, state, organization, etc. For local use, these can be fictitious.
   
-  1 - **Country Name (2 letter code)** : Specify ​**Ile-de-France​** as the state or province.<br>
+  1 - **Country Name (2 letter code)** : Specify ​**​`Ile-de-France​​`** as the state or province.<br>
   2 - **State or Province Name (full name)** : Indiquez **​`Ile-de-France`​** comme état ou province.<br>
-  3 - **Locality Name (eg, city)** : Write **Paris** for the city.<br>
-  4 - **Organization Name (eg, company)** : Leave this field **empty**.<br>
-  5 - **Organizational Unit Name (eg, section)** : Leave this field **empty**.<br>
-  6 - **Common Name (e.g. server FQDN or YOUR name)** : The full domain name, here it would be **www.shyno.tech**.<br>
-  7 - **Email Address**: Leave this field **empty**.<br>
+  3 - **Locality Name (eg, city)** : Write **​`Paris​`** for the city.<br>
+  4 - **Organization Name (eg, company)** : Leave this field **​`empty​`**.<br>
+  5 - **Organizational Unit Name (eg, section)** : Leave this field **​`empty​`**.<br>
+  6 - **Common Name (e.g. server FQDN or YOUR name)** : The full domain name, here it would be **​`www.shyno.tech​`**.<br>
+  7 - **Email Address**: Leave this field **​`empty​`**.<br>
  
      
 * Create an SSL configuration snippet for Apache : `nano /etc/apache2/conf-available/ssl-params.conf`
