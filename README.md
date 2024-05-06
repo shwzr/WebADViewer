@@ -86,7 +86,7 @@ Ensure that your LDAP server settings and IP addresses are correctly configured 
   3 - **Locality Name (eg, city)** : Write **​`Paris​`** for the city.<br>
   4 - **Organization Name (eg, company)** : Leave this field **​`empty​`**.<br>
   5 - **Organizational Unit Name (eg, section)** : Leave this field **​`empty​`**.<br>
-  6 - **Common Name (e.g. server FQDN or YOUR name)** : The full domain name, here it would be **​`www.shyno.tech​`**.<br>
+  6 - **Common Name (e.g. server FQDN or YOUR name)** : The full domain name, here it would be **​`www.shyno.tech​`**<br>
   7 - **Email Address**: Leave this field **​`empty​`**.<br>
  
      
