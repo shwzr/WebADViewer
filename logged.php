@@ -43,15 +43,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || !isset($_
         <img src="assets/img/user.png" alt="Image utilisateur" style="width: 80px; height: 80px; display: flex; margin: auto; margin-bottom: 50px; border: 3px solid #0077cc; border-radius: 50%; padding: 10px;">
     </div>
     <p><strong>Nom d'utilisateur :</strong> <?php echo htmlspecialchars($_SESSION["username"]); // Affiche le nom d'utilisateur en sécurité ?></p>
-    <p><strong>Groupe(s) :</strong> 
-    <?php
-        if (isset($_SESSION["groups"])) { // Affiche les groupes de l'utilisateur ou un message par défaut
-            echo htmlspecialchars(implode(", ", $_SESSION["groups"]));
-        } else {
-            echo "Aucun groupe trouvé.";
-        }
-    ?>
-    </p>
     <div style="text-align: center; margin-top: 20px;">
         <a href="logout.php" class="logout-link">Déconnexion</a> <!-- Lien de déconnexion -->
     </div>
