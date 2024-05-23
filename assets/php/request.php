@@ -1,19 +1,30 @@
 <?php
-// Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupère les informations du formulaire
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
     require 'config.php';
 
+    // Fonction pour exécuter la commande LDAP et capturer la sortie de débogage
+    function execute_ldap_command($command) {
+        $output = [];
+        $return_value = 0;
+        exec($command . ' 2>&1', $output, $return_value);
+        return [$output, $return_value];
+    }
+
     // Tente d'abord avec LDAPS
-    $ldap_command = "ldapsearch -x -H ldaps://{$ldap_host}:636 -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
-    exec($ldap_command, $output, $return_value);
+    $ldap_command = "ldapsearch -x -H ldaps://{$ldap_host}:{$ldaps_port} -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
+    list($output, $return_value) = execute_ldap_command($ldap_command);
+
+    // Variable pour stocker le type de connexion
+    $connection_type = "LDAPS";
 
     // Si LDAPS échoue, réessayer immédiatement avec LDAP
     if ($return_value !== 0) {
         $ldap_command = "ldapsearch -x -H ldap://{$ldap_host}:{$ldap_port} -D \"{$username}@{$ldap_domain}\" -w \"{$password}\" -b \"{$dc_string}\" \"(objectClass=user)\" sAMAccountName cn mail memberOf userPrincipalName";
-        exec($ldap_command, $output, $return_value);
+        list($output, $return_value) = execute_ldap_command($ldap_command);
+        $connection_type = "LDAP";
     }
 
     // Traitement après la tentative de connexion
@@ -25,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $username;
         $_SESSION["groups"] = getGroupsFromLDAP($output, $username);
         $_SESSION["ldap_output"] = $output; // Stocke la sortie LDAP dans la session
+        $_SESSION["connection_type"] = $connection_type; // Stocke le type de connexion dans la session
 
         // Redirection vers la page de profil
         header("Location: logged.php");
@@ -32,7 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Échec de l'authentification LDAP
         $login_err = "Identifiants incorrects.";
-        // Assurez-vous que les erreurs sont gérées et affichées correctement
+        // Affiche les erreurs de débogage LDAP
+        echo "<pre>";
+        echo "Commande LDAP exécutée : " . htmlspecialchars($ldap_command) . "\n";
+        echo "Sortie de la commande LDAP :\n";
+        foreach ($output as $line) {
+            echo htmlspecialchars($line) . "\n";
+        }
+        echo "</pre>";
     }
 }
 
