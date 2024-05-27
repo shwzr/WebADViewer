@@ -62,11 +62,12 @@ systemctl restart apache2
 * Modify the config.php file to match your LDAP configuration : `nano /var/www/html/config.php`
 ```bash
 <?php
-// LDAP Configuration
-$ldap_host = '192.168.1.100';      // IP address of the LDAP server
-$ldap_port = '389';
-$ldap_domain = 'shyno.tech';       // LDAP domain
-$dc_string = 'dc=shyno,dc=tech';   // DC string for the LDAP query
+// Configuration de LDAP
+$ldap_host = 'shyno.tech';  // Adresse IP du serveur LDAP
+$ldap_port = '389';  // Port LDAP
+$ldaps_port = '636'; // Port LDAPS
+$ldap_domain = 'shyno.tech';  // Domaine LDAP
+$dc_string = 'dc=shyno,dc=tech';  // Chaîne DC pour la requête LDAP
 ?>
 ```
 
